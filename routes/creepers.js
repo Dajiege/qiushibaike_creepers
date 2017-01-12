@@ -87,7 +87,12 @@ var task = require ("../task/qiushi_creepers");
 //    })
 //});
 router.get('/', function (req, res, next) {
-  task.qiushi();
+  task.qiushi(function(result,err){
+    if(err){
+      res.json(err);
+    }
+    res.json(result);
+  });
 });
 
 module.exports = router;

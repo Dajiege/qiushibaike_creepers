@@ -24,7 +24,7 @@ var fetchUrl = function (url, callback) {
       $('.article.block.untagged.mb15').each(function (idx, element) {
         var $element = $(element);
         itrms.push({
-          'id': $element.find('.contentHerf').attr("href").replace("/article/", ""),
+          '_id': $element.find('.contentHerf').attr("href").replace("/article/", ""),
           'content': $element.find(".content").text().replace(/[\r\n]/g, ""),
           'zan': $element.find('.stats-vote .number').text(),
           'user_hear': $element.find('.author.clearfix img').attr("src"),
@@ -47,7 +47,7 @@ var fetchUrl = function (url, callback) {
 
 
 module.exports = {
-  qiushi: function (req, res, next) {
+  qiushi: function ( cb) {
     //res.render('index', { title: 'Express' });
     superagent.get('http://www.qiushibaike.com/hot/')
       .end(function (err, sres) {
@@ -80,7 +80,8 @@ module.exports = {
           });
           console.log(data);
           mongoutil.saveData(data,"tb3",function(result){
-            res.json(result);
+            //res.json(result);
+            cb(result,err);
           });
 
         });

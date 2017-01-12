@@ -17,7 +17,13 @@ var task = require ("./task/qiushi_creepers");
   schedule.scheduleJob(config.CRON, function(){
     console.log('scheduleCronstyle:' + new Date());
     console.log('糗事百科爬虫');
-    task.qiushi();
+    task.qiushi(function(result,err){
+      if(err){
+        console.log(err);
+      }
+      console.log("糗事百科爬虫结束");
+
+    });
   });
 }
 scheduleCronstyle();
