@@ -58,7 +58,9 @@ module.exports = {
       console.log("连接成功！");
       saveData(data,conllection,db, function(result) {
         console.log(result);
-        cb(result);
+        if(cb){
+          cb(result);
+        }
         db.close();
       });
     });
