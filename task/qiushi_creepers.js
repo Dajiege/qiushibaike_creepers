@@ -70,16 +70,16 @@ module.exports = {
 
         var data=[];
         async.mapSeries(urls, function (url, callback) {
-          fetchUrl(url, callback, next);
+          fetchUrl(url, callback);
         }, function (err, result) {
           console.log(err);
 
-          console.log(result);
+          //console.log(result);
           result.forEach(function(res){
             data =  data.concat(res);
           });
-          console.log(data);
-          mongoutil.saveData(data,"tb3",function(result){
+          //console.log(data);
+          mongoutil.insertData(data,"tb3",function(result){
             //res.json(result);
             cb(result,err);
           });

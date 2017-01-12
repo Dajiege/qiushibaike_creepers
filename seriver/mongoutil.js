@@ -33,6 +33,7 @@ var selectData = function(where,conllection,select,db, callback) {
   var collection = db.collection(conllection);
   //查询数据
   collection.find(where,select).toArray(function(err, result) {
+    //console.log(result);
     if(err)
     {
       console.log('Error:'+ err);
@@ -47,8 +48,9 @@ module.exports = {
     MongoClient.connect(DB_CONN_STR, function(err, db) {
       console.log("连接成功！");
       insertData(data,conllection,db, function(result) {
-        console.log(result);
-        cb(result);
+        if(cb){
+          cb(result);
+        }
         db.close();
       });
     });
@@ -57,7 +59,6 @@ module.exports = {
     MongoClient.connect(DB_CONN_STR, function(err, db) {
       console.log("连接成功！");
       saveData(data,conllection,db, function(result) {
-        console.log(result);
         if(cb){
           cb(result);
         }
@@ -68,8 +69,8 @@ module.exports = {
   selectData:function(where,conllection,select,cb){
     MongoClient.connect(DB_CONN_STR, function(err, db) {
       console.log("连接成功！");
-      selectData(where,conllection,select,db, function(err,result) {
-        cb(err,result);
+      selectData(where,conllection,select,db, function(result) {
+          cb(result);
         db.close();
       });
     });
