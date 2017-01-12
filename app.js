@@ -5,11 +5,22 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
+var creepers = require('./routes/creepers');
 var select = require('./routes/select');
 
 var app = express();
-
+var schedule = require('node-schedule');
+var config = require("./config/config");
+//定时任务
+var task = require ("./task/qiushi_creepers");
+  function scheduleCronstyle(){
+  schedule.scheduleJob(config.CRON, function(){
+    console.log('scheduleCronstyle:' + new Date());
+    console.log('糗事百科爬虫');
+    task.qiushi();
+  });
+}
+scheduleCronstyle();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -22,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/creepers', creepers);
 app.use('/select',select);
 
 // catch 404 and forward to error handler

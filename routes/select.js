@@ -5,7 +5,7 @@ router.get('/', function (req, res, next) {
   //res.json(req.originalUrl);
   var data = {};
   if (req.param('sex')) {
-    !(req.param('sex') === "man" ) ? data.sex = "-1" : data.sex = {"$gte": 0}
+    !(req.param('sex') ==1 ) ? data.sex = "-1" : data.sex = {"$gte": 0}
   }
   if (req.param('zan')) {
     data.zan = {"$gte": req.param('zan')}
@@ -35,7 +35,7 @@ router.get('/', function (req, res, next) {
   console.log(data);
   console.log(select);
 
-  mongoutil.selectData(data, select, function (result) {
+  mongoutil.selectData(data, 'tb3',select, function (result) {
     res.json({
       count: result.length,
       data: result
