@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  #title
+  for cont in title
+
+    a(href= 'http://www.qiushibaike.com'+ cont.user_id, target= '_blank')
+        img(src= cont.user_hear).header
+
+

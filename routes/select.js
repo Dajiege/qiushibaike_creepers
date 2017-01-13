@@ -36,10 +36,12 @@ router.get('/', function (req, res, next) {
   console.log(select);
 
   mongoutil.selectData(data, 'tb3',select, function (result) {
-    res.json({
-      count: result.length,
-      data: result
-    });
+    if(select.user_hear){
+      res.render('header',{title : result})
+    }
+    if(select.content){
+      res.render('content',{title : result})
+    }
   });
 });
 module.exports = router;
