@@ -6,3 +6,29 @@ body {
 a {
   color: #00B7FF;
 }
+.item{
+  margin: 20px auto;
+  text-align: center;
+}
+.imgbox{
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.imgbox img{
+  width: 100%;
+}
+.contentbox{
+  display: inline-block;
+  width: 600px;
+  margin-left: 30px;
+  vertical-align: middle;
+}
+.header{
+  width: 250px;
+  height: 250px;
+}
+.ml15{
+  margin-left: 15px;
+}

@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var creepers = require('./routes/creepers');
 var select = require('./routes/select');
+var index = require('./routes/index');
 
 var app = express();
 var schedule = require('node-schedule');
@@ -39,6 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/',index);
 app.use('/creepers', creepers);
 app.use('/select',select);
 

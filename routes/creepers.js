@@ -3,7 +3,6 @@ var router = express.Router();
 var superagent = require("superagent");
 var cheerio = require("cheerio");
 var async = require("async");
-//var itrms = [];
 var mongoutil = require("../seriver/mongoutil");
 var task = require ("../task/qiushi_creepers");
 
