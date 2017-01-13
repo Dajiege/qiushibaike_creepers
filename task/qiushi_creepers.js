@@ -33,10 +33,7 @@ var fetchUrl = function (url, callback) {
           'age': $element.find('.articleGender').text(),
           'user_id':$element.find('.author.clearfix a').attr("href")
         });
-        //console.log(itrms);
-        //mongoutil.insertData(itrms)
       });
-      //console.log(itrms);
       callback(null, itrms);
     })
 
@@ -72,19 +69,18 @@ module.exports = {
         async.mapSeries(urls, function (url, callback) {
           fetchUrl(url, callback);
         }, function (err, result) {
-          console.log(err);
+          //console.log(err);
 
           //console.log(result);
           result.forEach(function(res){
             data =  data.concat(res);
           });
-          data.forEach(function(res){
-            mongoutil.saveData(res,"tb3",function(result){
-            //res.json(result);
-              cb(result,err);
-            });
-
+          async.mapSeries(data, function(l, callback){
+           mongoutil.saveData(l,"tb3",function(result){callback(err,result);});
+          },function(err,results){
+              cb(results,err);
           })
+
           
 
         });
