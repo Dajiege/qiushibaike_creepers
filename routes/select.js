@@ -5,7 +5,7 @@ router.get('/', function (req, res, next) {
   //res.json(req.originalUrl);
   var data = {};
   if (req.param('sex')) {
-    !(req.param('sex') ==1 ) ? data.sex = "-1" : data.sex = {"$gte": 0}
+    !(req.param('sex') =="man" ) ? data.sex = "-1" : data.sex = {"$ne": "-1"}
   }
   if (req.param('zan')) {
     data.zan = {"$gte": req.param('zan')}
