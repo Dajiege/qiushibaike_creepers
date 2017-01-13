@@ -22,8 +22,7 @@ var task = require ("./task/qiushi_creepers");
         console.log(err);
       }
       console.log("糗事百科爬虫结束");
-
-    });
+    },next);
   });
 }
 scheduleCronstyle();

@@ -91,8 +91,8 @@ router.get('/', function (req, res, next) {
     if(err){
       res.json(err);
     }
-    res.json(result);
-  });
+    res.json(result.result);
+  },next);
 });
 
 module.exports = router;

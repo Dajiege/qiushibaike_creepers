@@ -25,6 +25,7 @@ var fetchUrl = function (url, callback) {
         var $element = $(element);
         itrms.push({
           '_id': $element.find('.contentHerf').attr("href").replace("/article/", ""),
+          'id': $element.find('.contentHerf').attr("href").replace("/article/", ""),
           'content': $element.find(".content").text().replace(/[\r\n]/g, ""),
           'zan': $element.find('.stats-vote .number').text(),
           'user_hear': $element.find('.author.clearfix img').attr("src"),
@@ -47,7 +48,7 @@ var fetchUrl = function (url, callback) {
 
 
 module.exports = {
-  qiushi: function ( cb) {
+  qiushi: function ( cb,next) {
     //res.render('index', { title: 'Express' });
     superagent.get('http://www.qiushibaike.com/hot/')
       .end(function (err, sres) {
