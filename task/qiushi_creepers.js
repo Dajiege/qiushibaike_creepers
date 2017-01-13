@@ -78,11 +78,14 @@ module.exports = {
           result.forEach(function(res){
             data =  data.concat(res);
           });
-          //console.log(data);
-          mongoutil.insertData(data,"tb3",function(result){
+          data.forEach(function(res){
+            mongoutil.saveData(res,"tb3",function(result){
             //res.json(result);
-            cb(result,err);
-          });
+              cb(result,err);
+            });
+
+          })
+          
 
         });
       })

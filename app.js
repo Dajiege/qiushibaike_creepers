@@ -14,20 +14,19 @@ var schedule = require('node-schedule');
 var config = require("./config/config");
 //定时任务
 var task = require ("./task/qiushi_creepers");
-//   function scheduleCronstyle(){
-//   schedule.scheduleJob(config.CRON, function(){
-//     console.log('scheduleCronstyle:' + new Date());
-//     console.log('糗事百科爬虫');
-//     task.qiushi(function(result,err){
-//       if(err){
-//         console.log(err);
-//       }
-//       console.log("糗事百科爬虫结束");
+  function scheduleCronstyle(){
+  schedule.scheduleJob(config.CRON, function(){
+    console.log('scheduleCronstyle:' + new Date());
+    console.log('糗事百科爬虫');
+    task.qiushi(function(result,err){
+      if(err){
+        console.log(err);
+      }
 
-//     });
-//   });
-// }
-// scheduleCronstyle();
+    });
+  });
+}
+scheduleCronstyle();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
