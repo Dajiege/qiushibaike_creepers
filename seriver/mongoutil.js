@@ -18,7 +18,7 @@ var saveData = function(data,conllection,db, callback) {
   //连接到表
   var collection = db.collection(conllection);
   //插入数据
-  collection.insert(data, function(err, result) {
+  collection.save(data, function(err, result) {
     if(err)
     {
       console.log('Error:'+ err);
