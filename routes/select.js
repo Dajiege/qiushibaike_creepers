@@ -5,7 +5,7 @@ router.get('/', function (req, res, next) {
   //res.json(req.originalUrl);
   var data = {};
   if (req.param('sex')) {
-    !(req.param('sex') ==1 ) ? data.sex = "-1" : data.sex = {"$gte": 0}
+    !(req.param('sex') =="man" ) ? data.sex = "-1" : data.sex = {"$ne": "-1"}
   }
   if (req.param('zan')) {
     data.zan = {"$gte": req.param('zan')}
@@ -36,8 +36,23 @@ router.get('/', function (req, res, next) {
   console.log(select);
 
   mongoutil.selectData(data, 'tb3',select, function (result) {
-    if(select.user_hear){
-      res.render('header',{title : result})
+    if(select.user_hear && select.user_id){
+      var _header = result.filter(function(item, index, arr) {
+        return !item.user_hear.indexOf('http://pic');
+      });
+      var header = [];
+      for(var m in _header){
+        var flag = 1;
+        for(var i in header){
+          if(_header[m].user_id === header[i].user_id){
+            flag = 0;
+          }
+        }
+        if(flag){
+          header.push(_header[m]);
+        }
+      }
+      res.render('header',{title : header})
     }
     if(select.content){
       res.render('content',{title : result})

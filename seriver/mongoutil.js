@@ -57,7 +57,6 @@ module.exports = {
   },
   saveData:function(data,conllection,cb){
     MongoClient.connect(DB_CONN_STR, function(err, db) {
-      console.log("连接成功！");
       saveData(data,conllection,db, function(result) {
         if(cb){
           cb(result);
