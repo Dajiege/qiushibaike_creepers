@@ -3,6 +3,7 @@ var superagent = require("superagent");
 var cheerio = require("cheerio");
 var async = require("async");
 var mongoutil = require("../seriver/mongoutil");
+var config = require("../config/config");
 /**
  * 爬取数据
  * @param url
@@ -45,12 +46,12 @@ var fetchUrl = function (url, callback) {
 
 
 module.exports = {
-  qiushi: function ( cb,next) {
+  qiushi: function ( cb) {
     //res.render('index', { title: 'Express' });
     superagent.get('http://www.qiushibaike.com/hot/')
       .end(function (err, sres) {
         if (err) {
-          return next(err);
+          return cb(err);
         }
         var $ = cheerio.load(sres.text);
         var pages = [];
@@ -78,9 +79,10 @@ module.exports = {
           });
 
           async.mapSeries(data, function(l, callback){
-           mongoutil.saveData(l,"tb3",function(result){callback(err,result);});
+           mongoutil.saveData(l,config.data,function(result){callback(err,result);});
           },function(err,results){
-              cb(results,err);
+            //results.result={data:data};
+              cb({data:data},err);
           })
 
           
