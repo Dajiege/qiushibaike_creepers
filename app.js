@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var creepers = require('./routes/creepers');
 var select = require('./routes/select');
+var index = require('./routes/index');
 
 var app = express();
 var schedule = require('node-schedule');
@@ -26,6 +27,7 @@ var task = require ("./task/qiushi_creepers");
   });
 }
 scheduleCronstyle();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -38,6 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/',index);
 app.use('/creepers', creepers);
 app.use('/select',select);
 
